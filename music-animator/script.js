@@ -30,8 +30,8 @@ class MyVisualizer extends AbstractVisualizer {
       // 3) Compare the time properties to peak properties (part 1 and 2 above):
       //    -- If the audio's current time is greater or equal to the time of
       //    the peak, draw visualizations (drawShapes).
-      if (//TODO(you): Logic statement from step 3) here
-      ) {
+      if (true) {//TODO(you): Logic statement from step 3) here
+       
 
         // Update the frame.
         requestAnimationFrame(() => {
@@ -76,8 +76,9 @@ document.getElementById('playButton').addEventListener('click', (clickEvent) => 
   if(!audioEl.src) {
     // TODO(you): Use the spotifyApi to searchTracks for your input. Documentation can be found at:
     // https://doxdox.org/jmperez/spotify-web-api-js#src-spotify-web-api.js-constr.prototype.searchtracks
-    spotifyApi.searchTracks(// Add parameters here) 
-      .then((results) => {
+    spotifyApi.searchTracks('cyanide', {limit: 1})// Add parameters here) 
+      then((results) => {
+        let previewUrl 
           // TODO(you): Access track from results to find a previewUrl.
         if (previewUrl) {
           // Sets the HTML audio element source to the music.
