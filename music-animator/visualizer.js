@@ -271,3 +271,12 @@ function generateRandomValue(minValue = 1, maxValue = 10) {
   max = Math.floor(maxValue);
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+drawSquare();
+  var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.rect(20, 10, 100, 100);
+ctx.stroke();
+
+
+

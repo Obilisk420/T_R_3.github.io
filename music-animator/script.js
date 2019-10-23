@@ -76,9 +76,9 @@ document.getElementById('playButton').addEventListener('click', (clickEvent) => 
   if(!audioEl.src) {
     // TODO(you): Use the spotifyApi to searchTracks for your input. Documentation can be found at:
     // https://doxdox.org/jmperez/spotify-web-api-js#src-spotify-web-api.js-constr.prototype.searchtracks
-    spotifyApi.searchTracks('cyanide', {limit: 1})// Add parameters here) 
-      then((results) => {
-        let previewUrl 
+    spotifyApi.searchTracks(queryInput.value, {limit: 8})// Add parameters here) 
+      .then((results) => {
+        let previewUrl = results.tracks.items[0].preview_url
           // TODO(you): Access track from results to find a previewUrl.
         if (previewUrl) {
           // Sets the HTML audio element source to the music.
