@@ -87,8 +87,10 @@ document.getElementById('playButton').addEventListener('click', (clickEvent) => 
           requestAudio(previewUrl, (audio) => {
             // TODO(you): Use analyzeAudio to apply frequency analysis. 
 
+            let analyzedAudio = analyzeAudio(audio);
             // TODO(you): Create an instance of MyVisualizer using the
             // analyzed audio.
+            let visualizer = new MyVisualizer(analyzedAudio);
 
             audioEl.play();
             

@@ -1,5 +1,5 @@
 function getToken() {
-  return fetch('https://spotify-web-api-token.herokuapp.com/token')
+  return fetch('https://spotify-web-acpi-token.herokuapp.com/token')
     .then((response) => {
       return response.json();
     })
