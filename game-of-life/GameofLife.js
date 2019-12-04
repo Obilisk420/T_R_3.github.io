@@ -16,10 +16,12 @@ class Canvas{
         container.appendChild(this.obj)
         this.ctx=this.obj.getContext('2d')
         this.setGridSize(11);
+        canvasElement.width = this.pixelwidth;
+        canvasElement.height = this.pixelHeight;
 
     }
-    draw(cell){
-        this.ctx.strokeStyle = '#000';
+    draw(cells){
+        this.ctx.strokeStyle = '#8f00ff';
         this.ctx.lineWidth = 1;
         
         for(var i =this.cellSize; i<this.pixelWidth; i= i +this.cellSize){
@@ -38,9 +40,37 @@ class Canvas{
 
 
         }
+        this.ctx.fillStyle = 'Blue';
+        for(let i = 0;i < cells.length; i = i + 1){
+            let cell = cells[i];
+            let x = cell[0];
+            let y = cell[1];
+            this.ctx.fillRect( 
+                x * this.cellSize + 1,
+                y * this.cellSize + 1,
+                this.cellSize - 1,
+                this.cellSize - 1)
+        }
 
     }
     click(fn){
+        this.obj.addEventListener('click', (clickEvent)=>{
+            let rect = this.obj.getBoundingClientRect();
+            let clientX = clickEvent.clientX;
+            let clientY = clickEvent.clientY;
+
+            let canvasX = clientX - rect.left;
+            let canvasY = clientY - rect.top;
+
+            let cellX = Math.floor(canvasX/this.cellSize);
+            let cellY = Math.floor(canvasY/this.cellSize);
+
+            fn({cellX: cellX, cellY: cellY});
+            
+            console.log("CellX: "+cellX,"CellY: "+ cellY);
+            //console.log(cellY);
+
+        });
     }
     getDimension(){        
     }
@@ -64,12 +94,16 @@ class Shape{
     copy(shape){
     }
     redraw(){
+        this.canvas.draw(this.current);
     }
     center(){
     }
     offset(dx, dy){
     }
     toggle(cell){
+        this.current.push(cell);
+        this.redraw();
+
     }
 }
 class Controls{
@@ -84,7 +118,12 @@ class Controls{
     }
     init(shapes){
         this.canvas.click((event) => {
+            
         });
+        this.canvas.click((event)=>{
+            this.shape.toggle([event.cellX, event.cellY])
+        });
+
     }
     setGeneration(gen){
     }
@@ -99,3 +138,4 @@ let shape = new Shape(canvas);
 let gameoflife = new GameOfLife(canvas);
 let controls = new Controls(canvas, shape, gameoflife);
 canvas.draw(1)
+controls.init()
