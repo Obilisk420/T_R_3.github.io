@@ -1,8 +1,111 @@
-class GameOfLife{
+ class GameOfLife{
     constructor(){
 
     }
     next(shape){
+        let neighbors = {};
+        for(let i = 0; i<shape.length; i++){
+            let cell = shape[i];
+            let x = cell[0];
+            let y = cell[1];
+            let key = 'c' + (x-1) + ',' + (y)-1;
+            if (neighbors[key]) {
+                neighbors[key].n = neighbors[key].n +1;
+            }else{
+                neighbors[key] = {
+                    n: 1,
+                    cell: [x-1,y-1],
+                };
+            }
+
+
+            
+        } 
+        key = 'c' +(x) + ',' + (y-1)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x, y - 1],
+            };
+        }
+        key = 'c' +(x) + ',' + (y+1)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x, y + 1],
+            };
+        }
+        key = 'c' +(x-1) + ',' + (y)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x-1, y],
+            };
+        }key = 'c' +(x+1) + ',' + (y)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x+1, y],
+            };
+        }
+        key = 'c' +(x-1) + ',' + (y+1)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x-1, y + 1],
+            };
+        }key = 'c' +(x+1) + ',' + (y-1)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x+1, y - 1],
+            };
+        }key = 'c' +(x+1) + ',' + (y+1)
+        if (neighbors[key]){
+            neighbors[key].n = neighbors[key].n +1;          
+        }else{
+            neighbors[key] = {
+                n: 1,
+                cell: [x+1, y + 1],
+            };
+        }
+        for(let i = 0; i <shape.length; i++ ){
+            let cell = shape[i];
+            let x = cell[0];
+            let y = cell[1];
+            let key = 'c' + x + ',' +y;
+            if(neighbors[key]){
+                neighbors[key].populated = true;
+            }
+
+        }
+        let nextShape = [];
+        for(let key in neighbors){
+            let currentNeighbor = currentNeighbor.n;
+            let numOfNeighbors = currentNeighbor.n;
+            let populated = currenNeighbor.populated;
+            let cell = currentNeighbor.cell;
+
+            if (numOfNeighbors == 2 || numOfNeighbors ==3){
+                nextShape.push(cell);
+                
+            }
+            
+        }
+
+        return shape;
 
     }
 }
@@ -123,6 +226,11 @@ class Controls{
         this.canvas.click((event)=>{
             this.shape.toggle([event.cellX, event.cellY])
         });
+        let nextBtn = document.getElementById('next');
+        nextBtn.addEventListener('click', () => {
+            this.next();
+
+        });
 
     }
     setGeneration(gen){
@@ -130,6 +238,11 @@ class Controls{
     animate(){
     }
     next(){
+        console.log('F1NA77Y');
+        let anything = this.shape.get();
+        let updatedAnything = this.gameOfLife.next(anything);
+        this.gameOfLife.next(anything);
+
     }
 }
 let canvasElement = document.getElementById("canvas-div") ;
